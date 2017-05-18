@@ -20,4 +20,27 @@ public class GameBoard {
         }
     }
 
+    public boolean validateMove(Move move){
+        String colAlpha = move.getColAlpha();
+        int rowNum = move.getRowNum();
+
+        return rows.get(rowNum).validateMove(colAlpha);
+    }
+
+    public boolean winningMove(Move move) {
+        boolean winningMove = false;
+
+        String colAlpha = move.getColAlpha();
+        int rowNum = move.getRowNum();
+
+
+
+        return winningMove;
+    }
+
+    public Move parseMove (String moveString){
+        Move move = new Move(moveString);
+        return move;
+    }
+
 }

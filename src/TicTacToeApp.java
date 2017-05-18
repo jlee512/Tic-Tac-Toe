@@ -14,12 +14,25 @@ public class TicTacToeApp {
         boolean compHasWon = false;
 
         while (moveCount < 9 || !userHasWon || !compHasWon) {
+            if (moveCount == 0 || (moveCount % 2 == 0)){
             if (moveCount == 0){
                 System.out.print(" Please enter your first move: ");
             } else {
                 System.out.print("Please enter your next move: ");
             }
             String userMove = Keyboard.readInput();
+            /*Parse current move*/
+            Move currentMove = tictactoe.parseMove(userMove);
+            /*Validate current move*/
+            if(!tictactoe.validateMove(currentMove)){
+                System.out.println("You have entered an invalid move");
+                continue;
+            }
+            /*Check if move will win the game*/
+            else if (tictactoe.winningMove(currentMove)) {
+
+            }
+
             System.out.println(userMove);
 
             tictactoe.printGameBoard();

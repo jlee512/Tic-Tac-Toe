@@ -60,4 +60,21 @@ public class Row {
         }
     }
 
+    public boolean validateMove(String colAlpha){
+        boolean validMove = true;
+
+        /*If column is already taken, move is invalid*/
+        if (row.get(colAlpha) != null){
+            return false;
+        }
+
+
+
+        return validMove;
+    }
+
+    public void addMove (String colAlpha, String playerSymbol) {
+        row.put(colAlpha, playerSymbol);
+    }
+
 }
