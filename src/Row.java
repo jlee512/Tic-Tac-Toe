@@ -40,12 +40,14 @@ public class Row {
         String colB = " ";
         String colC = " ";
 
-        if (row.get("A") != null){
-            colA = row.get("A");
-        } else if (row.get("B") != null){
-            colB = row.get("B");
-        } else if (row.get("C") != null) {
-            colC = row.get("C");
+        if (row.get("A" + rowNum) != null){
+            colA = row.get("A" + rowNum);
+        }
+        if (row.get("B" + rowNum) != null){
+            colB = row.get("B" + rowNum);
+        }
+        if (row.get("C" + rowNum) != null) {
+            colC = row.get("C" + rowNum);
         }
 
         /*Change row output depending on row position (top, middle or bottom)*/
@@ -64,17 +66,27 @@ public class Row {
         boolean validMove = true;
 
         /*If column is already taken, move is invalid*/
-        if (row.get(colAlpha) != null){
+        System.out.println(row.get(colAlpha + rowNum).equals(" "));
+        if (!row.get(colAlpha + rowNum).equals(" ")){
             return false;
         }
-
-
-
         return validMove;
     }
 
     public void addMove (String colAlpha, String playerSymbol) {
-        row.put(colAlpha, playerSymbol);
+        row.put(colAlpha + rowNum, playerSymbol);
+    }
+
+    public boolean allRowWon (String colAlpha, String playerSymbol){
+        if(row.get(colAlpha + rowNum).equals(playerSymbol)) {
+            return (row.get("A" + rowNum).equals(playerSymbol) && row.get("B" + rowNum).equals(playerSymbol) && row.get("C" + rowNum).equals(playerSymbol));
+        } else {
+            return false;
+        }
+    }
+
+    public String squareFilledBy(String colAlpha){
+        return row.get(colAlpha + rowNum);
     }
 
 }

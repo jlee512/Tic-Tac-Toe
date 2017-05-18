@@ -1,3 +1,5 @@
+import com.sun.scenario.effect.impl.sw.sse.SSEBlend_SRC_OUTPeer;
+
 /**
  * Created by Julian on 18/05/2017.
  */
@@ -13,32 +15,38 @@ public class TicTacToeApp {
         boolean userHasWon = false;
         boolean compHasWon = false;
 
-        while (moveCount < 9 || !userHasWon || !compHasWon) {
-            if (moveCount == 0 || (moveCount % 2 == 0)){
-            if (moveCount == 0){
-                System.out.print(" Please enter your first move: ");
-            } else {
-                System.out.print("Please enter your next move: ");
-            }
-            String userMove = Keyboard.readInput();
+        while (moveCount < 9 && !userHasWon && !compHasWon) {
+                if (moveCount == 0) {
+                    System.out.print(" Please enter your first move: ");
+                } else {
+                    System.out.print("Please enter your next move: ");
+                }
+                String userMove = Keyboard.readInput();
             /*Parse current move*/
-            Move currentMove = tictactoe.parseMove(userMove);
+                Move currentMove = tictactoe.parseMove(userMove);
             /*Validate current move*/
-            if(!tictactoe.validateMove(currentMove)){
-                System.out.println("You have entered an invalid move");
-                continue;
+                if (!tictactoe.validateMove(currentMove)) {
+                    System.out.println("You have entered an invalid move");
+                    continue;
+                }
+
+                tictactoe.makeMove(currentMove, "X");
+
+                tictactoe.printGameBoard();
+                moveCount++;
+                System.out.println("Move number: " + moveCount);
+                /*Check if move will win the game*/
+                if (tictactoe.winningMove(currentMove, "X")) {
+                userHasWon = true;
             }
-            /*Check if move will win the game*/
-            else if (tictactoe.winningMove(currentMove)) {
-
-            }
-
-            System.out.println(userMove);
-
-            tictactoe.printGameBoard();
-            moveCount++;
         }
-
+        if (userHasWon){
+            System.out.println("The Player has defeated the Computer!");
+        } else if (compHasWon){
+            System.out.println("The Computer has defeated the Player!");
+        } else {
+            System.out.println("The match is a draw...");
+        }
     }
 
 
