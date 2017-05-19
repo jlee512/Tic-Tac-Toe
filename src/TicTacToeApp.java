@@ -22,6 +22,7 @@ public class TicTacToeApp {
                     System.out.print("Please enter your next move: ");
                 }
                 String userMove = Keyboard.readInput();
+
             /*Parse current move*/
                 Move currentMove = tictactoe.parseMove(userMove);
             /*Validate current move*/
