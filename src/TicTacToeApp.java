@@ -42,7 +42,14 @@ public class TicTacToeApp {
                 break;
             }
 
-            /*Make Computer Move after the players move*/
+            /*Make Computer Move after the players move - set default priority of moves*/
+            boolean validComputerMove = false;
+            while (!validComputerMove){
+                String computerMoveString = generateComputerMove();
+                Move computerMove = tictactoe.parseMove(computerMoveString);
+                validComputerMove = tictactoe.validateMove(computerMove);
+            }
+
         }
         if (userHasWon) {
             System.out.println("The Player has defeated the Computer!");
@@ -72,6 +79,13 @@ public class TicTacToeApp {
                 continue;
             }
         }
+    }
+
+    public String generateComputerMove() {
+        String computerMoveString = "";
+        int generateRowNum = (int) (Math.random() * 3) + 1;
+        int generateColAlpha = (int) (Math.random() * 3);
+        computerMoveString = generateColAlpha
     }
 
 }
