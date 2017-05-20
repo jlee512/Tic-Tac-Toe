@@ -1,3 +1,5 @@
+import com.sun.scenario.effect.impl.sw.sse.SSEBlend_SRC_OUTPeer;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -38,6 +40,7 @@ public class GameBoard {
         } else if (rowNum < 1 || rowNum > 3){
             return false;
         }
+        System.out.println("Move has been validated");
         /*If selection is part of the board, check the space is not taken*/
         return rows.get(rowNum - 1).validateMove(colAlpha);
     }
@@ -55,18 +58,16 @@ public class GameBoard {
         }
         /* Check all col has same symbol*/
         for (int i = 0; i < 3; i++) {
-//            System.out.println("Row: " + i);
             String colA = rows.get(i).squareFilledBy("A");
             String colB = rows.get(i).squareFilledBy("B");
             String colC = rows.get(i).squareFilledBy("C");
-//            System.out.println(colA);
-//            System.out.println(colB);
-//            System.out.println(colC);
+            System.out.println("ColA, row" + i + " = " + colA);
+            System.out.println("ColB, row" + i + " = " + colB);
+            System.out.println("ColC, row" + i + " = " + colC);
             if (colA != " " && colA.equals(colB) && colB.equals(colC)){
-
+                return true;
             }
         }
-
         return false;
     }
 
@@ -80,19 +81,15 @@ public class GameBoard {
 
     public Move parseMove (String moveString){
         /* Validate that move is a two character String and that the second character is an integer, otherwise set move to default error string that will be caught by validation function*/
-        System.out.println(moveString.length());
-        if (moveString.length() > 2){
-            Move move = new Move("D4");
+        Move move;
+        if (moveString.length() > 2 || (moveString.charAt(1) <= '1' && moveString.charAt(1) >= '9')) {
+            move = new Move("D4");
         }
-
-//        colAlpha = moveString.substring(0,1);
-//        rowNum = Integer.parseInt(moveString.substring(1));
-
         else {
             /*If no immediately obvious issues with input, parse move*/
-            Move move = new Move(moveString);
-            return move;
+            move = new Move(moveString);
         }
+        return move;
     }
 
 }
