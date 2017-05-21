@@ -66,7 +66,6 @@ public class Row {
         boolean validMove = true;
 
         /*If column is already taken, move is invalid*/
-        System.out.println(row.get(colAlpha + rowNum).equals(" "));
         if (!row.get(colAlpha + rowNum).equals(" ")){
             return false;
         }

@@ -44,12 +44,23 @@ public class TicTacToeApp {
 
             /*Make Computer Move after the players move - set default priority of moves*/
             boolean validComputerMove = false;
+            Move computerMove = new Move();
             while (!validComputerMove){
                 String computerMoveString = generateComputerMove();
-                Move computerMove = tictactoe.parseMove(computerMoveString);
+                computerMove = tictactoe.parseMove(computerMoveString);
                 validComputerMove = tictactoe.validateMove(computerMove);
             }
+            /*Make the move if it is valid*/
+            tictactoe.makeMove(computerMove, "O");
 
+            /*Print gameboard and increment move count*/
+            tictactoe.printGameBoard();
+            moveCount++;
+            System.out.println("Move number: " + moveCount);
+            if (tictactoe.winningMove(currentMove, "O")) {
+                compHasWon = true;
+                break;
+            }
         }
         if (userHasWon) {
             System.out.println("The Player has defeated the Computer!");
@@ -84,8 +95,11 @@ public class TicTacToeApp {
     public String generateComputerMove() {
         String computerMoveString = "";
         int generateRowNum = (int) (Math.random() * 3) + 1;
-        int generateColAlpha = (int) (Math.random() * 3);
-        computerMoveString = generateColAlpha
+        char generateColAlpha = (char) (Math.random() * 3 + 'A');
+        computerMoveString += generateColAlpha;
+        computerMoveString += generateRowNum;
+        System.out.println("Thinking: " + computerMoveString);
+        return computerMoveString;
     }
 
 }

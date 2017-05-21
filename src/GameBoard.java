@@ -58,7 +58,9 @@ public class GameBoard {
         }
         /* Check all col has same symbol*/
         for (int i = 0; i < 3; i++) {
-            String colA = rows.get(i).squareFilledBy("A");
+            int checkColInt = 'A' + i;
+            char checkCol = (char) checkColInt;
+            String colA = rows.get(i).squareFilledBy(checkCol);
             String colB = rows.get(i).squareFilledBy("B");
             String colC = rows.get(i).squareFilledBy("C");
             System.out.println("ColA, row" + i + " = " + colA);
