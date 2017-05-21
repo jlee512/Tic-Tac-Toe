@@ -59,14 +59,21 @@ public class GameBoard {
         /* Check all col has same symbol*/
         for (int i = 0; i < 3; i++) {
             int checkColInt = 'A' + i;
-            char checkCol = (char) checkColInt;
-            String colA = rows.get(i).squareFilledBy(checkCol);
-            String colB = rows.get(i).squareFilledBy("B");
-            String colC = rows.get(i).squareFilledBy("C");
-            System.out.println("ColA, row" + i + " = " + colA);
-            System.out.println("ColB, row" + i + " = " + colB);
-            System.out.println("ColC, row" + i + " = " + colC);
+            String checkCol = Character.toString((char) checkColInt);
+            String colA = rows.get(0).squareFilledBy(checkCol);
+            String colB = rows.get(1).squareFilledBy(checkCol);
+            String colC = rows.get(2).squareFilledBy(checkCol);
             if (colA != " " && colA.equals(colB) && colB.equals(colC)){
+                return true;
+            }
+        }
+
+        /*Check if either of the two diagonals have the same symbol (starting at the middle)*/
+        if (rows.get(1).squareFilledBy("B").equals(playerSymbol)) {
+            /*If the middle cell is the player symbol search first if one diagonal is complete*/
+            if (rows.get(0).squareFilledBy("A").equals(playerSymbol) && rows.get(2).squareFilledBy("C").equals(playerSymbol)){
+                return true;
+            } else if (rows.get(0).squareFilledBy("C").equals(playerSymbol) && rows.get(2).squareFilledBy("A").equals(playerSymbol)){
                 return true;
             }
         }
